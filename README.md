@@ -20,7 +20,7 @@ NOTE: If you encounter the warning `We did not find Isaac Sim under ~/.local/sha
 conda activate omnigibson
 cd ..
 git clone https://github.com/zhangyue-fdu/Resistive-memory-based-constraint-optimization-solver.git
-cd ReKep
+cd Robot manipulation/Keyponit_extraction&Constraints_generation
 pip install -r requirements.txt
 ```
 
@@ -28,5 +28,6 @@ pip install -r requirements.txt
 ```Shell
 export OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
 ```
+
 
 
