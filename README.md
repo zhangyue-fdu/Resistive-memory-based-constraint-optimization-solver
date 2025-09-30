@@ -9,7 +9,7 @@ The codes run on Ubuntu 20.04 or Windows10, cuda 11.2.
 
 ## Setup Instructions
 
-The keypoint and constraints generation is from the official demo code for ReKep implemented in OmniGibson [Project Page]](https://rekep-robot.github.io/). Note that this codebase is best run with a display. For running in headless mode, refer to the [instructions in OmniGibson](https://behavior.stanford.edu/omnigibson/getting_started/installation.html).
+The keypoint and constraints generation is from the official demo code for ReKep implemented in OmniGibson (https://rekep-robot.github.io/). Note that this codebase is best run with a display. For running in headless mode, refer to the [instructions in OmniGibson](https://behavior.stanford.edu/omnigibson/getting_started/installation.html).
 
 - Install [OmniGibson](https://behavior.stanford.edu/omnigibson/getting_started/installation.html). This code is tested on [this commit](https://github.com/StanfordVL/OmniGibson/tree/cc0316a0574018a3cb2956fcbff3be75c07cdf0f).
 
@@ -23,6 +23,7 @@ git clone https://github.com/zhangyue-fdu/Resistive-memory-based-constraint-opti
 cd Robot manipulation/Keyponit_extraction&Constraints_generation
 pip install -r requirements.txt
 ```
+
 
 
 
