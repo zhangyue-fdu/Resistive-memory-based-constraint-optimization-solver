@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<robot name="hollow_cup">
+    <link name="cup">
+        <!-- 外壁（蓝色） -->
+        <visual>
+            <origin xyz="0 0 0.05" rpy="0 0 0"/>
+            <geometry>
+                <cylinder length="0.1" radius="0.05"/>
+            </geometry>
+            <material name="blue">
+                <color rgba="0 0 1 1"/>
+            </material>
+        </visual>
+
+        <!-- 内壁（透明，仅视觉效果） -->
+        <visual>
+            <origin xyz="0 0 0.05" rpy="0 0 0"/>
+            <geometry>
+                <cylinder length="0.09" radius="0.04"/>
+            </geometry>
+            <material name="transparent">
+                <color rgba="0 0 1 0"/>
+            </material>
+        </visual>
+
+        <!-- 底部（蓝色） -->
+        <visual>
+            <origin xyz="0 0 0.005" rpy="0 0 0"/>
+            <geometry>
+                <cylinder length="0.01" radius="0.04"/>
+            </geometry>
+            <material name="blue">
+                <color rgba="0 0 1 1"/>
+            </material>
+        </visual>
+
+        <!-- 碰撞几何体 -->
+        <!-- 外壁碰撞 -->
+        <collision>
+            <origin xyz="0 0 0.05" rpy="0 0 0"/>
+            <geometry>
+                <cylinder length="0.1" radius="0.05"/>
+            </geometry>
+        </collision>
+        <!-- 内壁碰撞（被减去的部分，用负空间模拟） -->
+        <collision>
+            <origin xyz="0 0 0.05" rpy="0 0 0"/>
+            <geometry>
+                <cylinder length="0.09" radius="0.04"/>
+            </geometry>
+        </collision>
+        <!-- 底部碰撞 -->
+        <collision>
+            <origin xyz="0 0 0.005" rpy="0 0 0"/>
+            <geometry>
+                <cylinder length="0.01" radius="0.04"/>
+            </geometry>
+        </collision>
+
+        <!-- 惯性属性 -->
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="0.2"/>
+            <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+        </inertial>
+    </link>
+</robot>
