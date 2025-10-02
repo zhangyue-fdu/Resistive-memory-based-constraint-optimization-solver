@@ -17,7 +17,7 @@ The keypoint and constraints generation is from the official demo code for ReKep
 
 NOTE: If you encounter the warning `We did not find Isaac Sim under ~/.local/share/ov/pkg.` when running `./scripts/setup.sh` for OmniGibson, first ensure that you have installed Isaac Sim. Assuming Isaac Sim is installed in the default directory, then provide the following path `/home/[USERNAME]/.local/share/ov/pkg/isaac-sim-2023.1.1` (replace `[USERNAME]` with your username).
 
-- Install ReKep in the same conda environment:
+- Install project in the same conda environment:
 ```Shell
 conda activate omnigibson
 cd ..
@@ -25,6 +25,7 @@ git clone https://github.com/zhangyue-fdu/Resistive-memory-based-constraint-opti
 cd Robot manipulation/Keyponit_extraction&Constraints_generation
 pip install -r requirements.txt
 ```
+
 
 
 
