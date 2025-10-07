@@ -1,0 +1,34 @@
+// VerilogA for Github_solver, Variable_OPA, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module Variable(Vout_N, Vout_P, AVDD, AVSS, CTRLN, I_input, Vref);
+output Vout_N;
+electrical Vout_N;
+output Vout_P;
+electrical Vout_P;
+inout AVDD;
+electrical AVDD;
+inout AVSS;
+electrical AVSS;
+input CTRLN;
+electrical CTRLN;
+input I_input;
+electrical I_input;
+input Vref;
+electrical Vref;
+
+resistor  #(.r(5500)) r1 (I_input, n);
+resistor  #(.r(5500)) r2 (Vref, p);
+capacitor  #(.c(30p)) c1 (n, Vout_P);
+OPA_VA #(.gain(900000), .freq_unitygain(100000000), .vsoft(0.1)) I1 (.vin_n(n), .vin_p(p), .vout(Vout_P), .vref(Vref), .vspply_n(AVSS), .vspply_p(AVDD));
+resistor  #(.r(2500)) r3 (Vout_P, n_2);
+resistor  #(.r(2500)) r4 (n_2, Vout_N);
+OPA_VA #(.gain(900000), .freq_unitygain(100000000), .vsoft(0.1)) I2 (.vin_n(n_2), .vin_p(p_2), .vout(Vout_N), .vref(Vref), .vspply_n(AVSS), .vspply_p(AVDD));
+resistor  #(.r(1500)) r5 (Vref, p_2);
+N_33_MM #(.w(10u), .l(500n)) m1 (.G(CTRLN), .D(I_input), .B(AVSS), .S(AVSS));
+N_33_MM #(.w(10u), .l(500n)) m2 (.G(CTRLN), .D(Vout_P), .B(AVSS), .S(AVSS));
+N_33_MM #(.w(10u), .l(500n)) m3 (.G(CTRLN), .D(Vout_N), .B(AVSS), .S(AVSS));
+
+endmodule
