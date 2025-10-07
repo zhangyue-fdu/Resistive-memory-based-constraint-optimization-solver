@@ -1,0 +1,44 @@
+// VerilogA for Github_solver, Constraint_OPA_2P, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module Constraint(Vout_n, Vout_p, AVDD, AVSS, CTRLN, I_input, Vref);
+output Vout_n;
+electrical Vout_n;
+output Vout_p;
+electrical Vout_p;
+inout AVDD;
+electrical AVDD;
+inout AVSS;
+electrical AVSS;
+inout CTRLN;
+electrical CTRLN;
+input I_input;
+electrical I_input;
+input Vref;
+electrical Vref;
+
+resistor  #(.r(6500)) r1 (Vref, p_1);
+resistor  #(.r(1000000)) r2 (I_input, vout_1);
+capacitor  #(.c(100f)) c1 (I_input, vout_1);
+OPA_VA #(.gain(900000), .freq_unitygain(100000000), .vsoft(0.1)) I1 (.vin_n(I_input), .vin_p(p_1), .vout(vout_1), .vref(Vref), .vspply_n(AVSS), .vspply_p(AVDD));
+resistor  #(.r(100)) r3 (vout_1, n_2);
+resistor  #(.r(200)) r4 (Vref, p_2);
+OPA_VA #(.gain(900000), .freq_unitygain(100000000), .vsoft(0.1)) I2 (.vin_n(n_2), .vin_p(p_2), .vout(vout_2), .vref(Vref), .vspply_n(AVSS), .vspply_p(AVDD));
+DIOP_MM  #(.area(8e-11), .perim(36.0u), .m(1)) d1 (n_2, vout_2);
+OPA_VA #(.gain(900000), .freq_unitygain(100000000), .vsoft(0.1)) I3 (.vin_n(Vout_n), .vin_p(n_2), .vout(Vout_n), .vref(Vref), .vspply_n(AVSS), .vspply_p(AVDD));
+resistor  #(.r(2500)) r5 (n_2, n_4);
+resistor  #(.r(1500)) r6 (Vref, p_4);
+resistor  #(.r(2500)) r7 (n_4, Vout_p);
+OPA_VA #(.gain(900000), .freq_unitygain(100000000), .vsoft(0.1)) I4 (.vin_n(n_4), .vin_p(p_4), .vout(Vout_p), .vref(Vref), .vspply_n(AVSS), .vspply_p(AVDD));
+N_33_MM #(.w(10u), .l(500n)) m1 (.G(CTRLN), .D(I_input), .B(AVSS), .S(AVSS));
+N_33_MM #(.w(10u), .l(500n)) m2 (.G(CTRLN), .D(vout_1), .B(AVSS), .S(AVSS));
+N_33_MM #(.w(10u), .l(500n)) m3 (.G(CTRLN), .D(vout_2), .B(AVSS), .S(AVSS));
+N_33_MM #(.w(10u), .l(500n)) m4 (.G(CTRLN), .D(n_2), .B(AVSS), .S(AVSS));
+N_33_MM #(.w(10u), .l(500n)) m5 (.G(CTRLN), .D(Vout_n), .B(AVSS), .S(AVSS));
+N_33_MM #(.w(10u), .l(500n)) m6 (.G(CTRLN), .D(n_2), .B(AVSS), .S(AVSS));
+N_33_MM #(.w(10u), .l(500n)) m7 (.G(CTRLN), .D(Vout_p), .B(AVSS), .S(AVSS));
+
+
+endmodule
